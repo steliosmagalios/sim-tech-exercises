@@ -2,10 +2,10 @@ mod generator;
 
 use crate::generator::Generator;
 
-const TESTING_SEED: u64 = 0;
+const TESTING_SEED: u64 = 123456;
 
 fn main() {
-    println!("Linear Congruential Generator (seed = 0)");
+    println!("Linear Congruential Generator (seed = {})", TESTING_SEED);
 
     println!("\n{:=^60}", "Test 01");
     println!("{:=^60}\n", "Display the first 100 random numbers");
