@@ -2,7 +2,7 @@ mod generator;
 
 use crate::generator::Generator;
 
-const TESTING_SEED: u64 = 123456;
+const TESTING_SEED: u64 = 0;
 
 fn main() {
     println!("Linear Congruential Generator (seed = {})", TESTING_SEED);
@@ -39,7 +39,7 @@ fn test_1() {
     let mut prng: Generator = Generator::new_with_seed(TESTING_SEED);
 
     for i in 0..100 {
-        println!("{:3}: {:.20}", i + 1, prng.next_random())
+        println!("{:3}: {:.17}", i + 1, prng.next_random())
     }
 }
 
@@ -66,6 +66,7 @@ fn test_2() {
 
     let standard_deviation: f64 = (ssq / 100.0 - (sqs / 100.0).powf(2.0)).sqrt();
 
+    // Printing
     println!("              Mean: {:.6}", mean);
     println!("Standard Deviation: {:.6}", standard_deviation);
 }
@@ -93,13 +94,50 @@ fn test_3() {
 
     let standard_deviation: f64 = (ssq / 1_000_000.0 - (sqs / 1_000_000.0).powf(2.0)).sqrt();
 
+    // Printing
     println!("              Mean: {:.6}", mean);
     println!("Standard Deviation: {:.6}", standard_deviation);
 }
 
 /// Test 4: Runs test for runs 1 through 10
 fn test_4() {
-    // let mut prng: Generator = Generator::new_with_seed(TESTING_SEED);
+    let mut prng: Generator = Generator::new_with_seed(TESTING_SEED);
+    let mut runs: [u64; 10] = [0; 10];
+
+    let mut run_above: bool = prng.next_random() >= 0.5;
+    let mut current_run: u64 = 1;
+
+    for _ in 1..1_000_000 {
+        match (run_above, prng.next_random() >= 0.5) {
+            // Run continues
+            (true, true) => current_run += 1,
+            (false, false) => current_run += 1,
+
+            // Run ended
+            _ => {
+                // Store the run that ended
+                runs[(current_run - 1).min(9) as usize] += 1;
+
+                // Start new run
+                current_run = 1;
+                run_above = !run_above;
+            }
+        }
+    }
+
+    // Printing
+    println!("{:^60}", format!("{:^15} {:^15}", "Run", "Probability"));
+    for (i, occurencies) in runs.iter().enumerate() {
+        println!(
+            "{:^60}",
+            format!(
+                "{:^15} {:^15.6}",
+                format!("[{:.1}, {:.1})", i, (i + 1) as f64 / 10.0),
+                *occurencies as f64 / 1_000_000.0
+            )
+        );
+    }
+    // println!("{:?}", runs);
 }
 
 /// Test 5: Regions test for 10 regions
