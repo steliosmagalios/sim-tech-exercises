@@ -2,7 +2,7 @@ mod generator;
 
 use crate::generator::Generator;
 
-const TESTING_SEED: u64 = 0;
+const TESTING_SEED: u64 = 12345;
 
 fn main() {
     println!("Linear Congruential Generator (seed = {})", TESTING_SEED);
@@ -130,11 +130,7 @@ fn test_4() {
     for (i, occurencies) in runs.iter().enumerate() {
         println!(
             "{:^60}",
-            format!(
-                "{:^15} {:^15.6}",
-                format!("[{:.1}, {:.1})", i, (i + 1) as f64 / 10.0),
-                *occurencies as f64 / 1_000_000.0
-            )
+            format!("{:^15} {:^15.6}", i + 1, *occurencies as f64 / 1_000_000.0)
         );
     }
     // println!("{:?}", runs);
