@@ -2,6 +2,8 @@ mod generator;
 
 use crate::generator::Generator;
 
+const TESTING_SEED: u64 = 0;
+
 fn main() {
     println!("Linear Congruential Generator (seed = 0)");
 
@@ -34,7 +36,7 @@ fn main() {
 
 /// Test 1: Display the first 100 random numbers
 fn test_1() {
-    let mut prng: Generator = Generator::new_with_seed(0);
+    let mut prng: Generator = Generator::new_with_seed(TESTING_SEED);
 
     for i in 0..100 {
         println!("{:3}: {:.20}", i + 1, prng.next_random())
@@ -43,7 +45,7 @@ fn test_1() {
 
 /// Test 2: Mean and Standard Deviation of first 100 numbers
 fn test_2() {
-    let mut prng: Generator = Generator::new_with_seed(0);
+    let mut prng: Generator = Generator::new_with_seed(TESTING_SEED);
 
     let mut mean: f64 = 0.0;
     let mut ssq: f64 = 0.0;
@@ -70,7 +72,7 @@ fn test_2() {
 
 /// Test 3: Mean and Standard Deviation of first 1,000,000 numbers
 fn test_3() {
-    let mut prng: Generator = Generator::new_with_seed(0);
+    let mut prng: Generator = Generator::new_with_seed(TESTING_SEED);
 
     let mut mean: f64 = 0.0;
     let mut ssq: f64 = 0.0;
@@ -97,12 +99,12 @@ fn test_3() {
 
 /// Test 4: Runs test for runs 1 through 10
 fn test_4() {
-    // let mut prng: Generator = Generator::new_with_seed(0);
+    // let mut prng: Generator = Generator::new_with_seed(TESTING_SEED);
 }
 
 /// Test 5: Regions test for 10 regions
 fn test_5() {
-    let mut prng: Generator = Generator::new_with_seed(0);
+    let mut prng: Generator = Generator::new_with_seed(TESTING_SEED);
     let mut regions: [u64; 10] = [0; 10];
 
     for _ in 0..1_000_000 {
