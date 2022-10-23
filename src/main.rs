@@ -114,8 +114,13 @@ fn test_5() {
         regions[region] += 1;
     }
 
+    // Printing
     println!("{:^15} {:^15}", "Region", "Probability");
     for (i, occurencies) in regions.iter().enumerate() {
-        println!("{:^15} {:^15.6}", i, *occurencies as f64 / 1_000_000.0);
+        println!(
+            "{:^15} {:^15.6}",
+            format!("[{:.1}, {:.1})", i, (i + 1) as f64 / 10.0),
+            *occurencies as f64 / 1_000_000.0
+        );
     }
 }
