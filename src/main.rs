@@ -64,8 +64,8 @@ fn test_2() {
 
     let standard_deviation: f64 = (ssq / 100.0 - (sqs / 100.0).powf(2.0)).sqrt();
 
-    println!("              Mean: {}", mean);
-    println!("Standard Deviation: {}", standard_deviation);
+    println!("              Mean: {:.6}", mean);
+    println!("Standard Deviation: {:.6}", standard_deviation);
 }
 
 /// Test 3: Mean and Standard Deviation of first 1,000,000 numbers
@@ -91,8 +91,8 @@ fn test_3() {
 
     let standard_deviation: f64 = (ssq / 1_000_000.0 - (sqs / 1_000_000.0).powf(2.0)).sqrt();
 
-    println!("              Mean: {}", mean);
-    println!("Standard Deviation: {}", standard_deviation);
+    println!("              Mean: {:.6}", mean);
+    println!("Standard Deviation: {:.6}", standard_deviation);
 }
 
 /// Test 4: Runs test for runs 1 through 10
